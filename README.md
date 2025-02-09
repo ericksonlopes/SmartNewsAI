@@ -1,0 +1,2 @@
+# SmartNewsAI-
+Intelligent news discovery.
