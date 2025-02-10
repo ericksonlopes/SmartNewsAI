@@ -1,0 +1,3 @@
+from src.interface.news_search_interface import news_search_interface
+
+news_search_interface()
