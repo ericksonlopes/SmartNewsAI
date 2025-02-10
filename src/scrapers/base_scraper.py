@@ -49,7 +49,7 @@ class BaseScraper(ABC):
         :param content:
         :return:
         """
-        logger.debug(f"Extraindo conteúdo: {content[:100]}...")
+        logger.info(f"Extraindo conteúdo: {content[:100]}...")
         response = self.structured_llm.invoke(content)
 
         return response

@@ -45,7 +45,11 @@ class NewsSearchAgent:
             raise e
 
     def generate_response(self, text):
-        result = self.agent_chain.invoke(
-            {"input": text}
-        )
-        return result.get('output')
+        try:
+            result = self.agent_chain.invoke(
+                {"input": text}, handle_parsing_errors=True
+            )
+            return result.get('output')
+        except Exception as e:
+            logger.error(f"Error generating response: {e}")
+            raise e
