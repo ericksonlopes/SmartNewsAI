@@ -30,7 +30,7 @@ class BaseScraper(ABC):
     """
 
     def __init__(self):
-        logger.info("Inicializando o WebScraper")
+        logger.info("Starting WebScraper...")
         os.environ['OPENAI_API_KEY'] = config('OPENAI_API_KEY')
 
         try:
@@ -49,13 +49,13 @@ class BaseScraper(ABC):
         :param content:
         :return:
         """
-        logger.info(f"Extraindo conteúdo: {content[:100]}...")
+        logger.info(f"Extracting structured information from content: {content}")
         response = self.structured_llm.invoke(content)
 
         return response
 
     def scrape_with_playwright(self, urls: List[str], tags_to_extract: List[str]):
-        logger.info(f"Iniciando scraping para URLs: {urls}")
+        logger.info(f"Starting scraping with Playwright for URLs: {urls}")
 
         try:
             loader = AsyncChromiumLoader(urls)
@@ -82,10 +82,10 @@ class BaseScraper(ABC):
                     self.__extract(content=split.page_content)
                 )
         except Exception as e:
-            logger.error(f"Erro ao realizar scraping: {e}")
+            logger.error(f"Error while scraping with Playwright: {e}")
             raise e
         else:
-            logger.info("Scraping concluído")
+            logger.info("Scraping with Playwright completed successfully.")
             return extracted_content
 
     @abstractmethod

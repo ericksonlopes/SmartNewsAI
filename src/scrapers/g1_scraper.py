@@ -10,7 +10,7 @@ logger = configure_logger()
 class G1Scraper(BaseScraper):
     def __init__(self):
         super().__init__()
-        logger.info("G1Scraper inicializado")
+        logger.info("G1Scraper initialized")
 
         self.tags_to_extract = ["ul"]
 
