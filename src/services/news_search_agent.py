@@ -13,7 +13,6 @@ logger = configure_logger()
 
 class NewsSearchAgent:
     def __init__(self):
-        # Configurando chave de API
         os.environ['OPENAI_API_KEY'] = config('OPENAI_API_KEY')
 
         self.verbose = False
@@ -27,7 +26,7 @@ class NewsSearchAgent:
             # Inicializando o agente
             self.llm = ChatOpenAI(
                 model="gpt-4o-mini",
-                temperature=0,  # Configura o modelo para respostas determinísticas
+                temperature=0,
             )
         except Exception as e:
             logger.error(f"Error initializing the agent: {e}")
@@ -46,9 +45,7 @@ class NewsSearchAgent:
 
     def generate_response(self, text):
         try:
-            result = self.agent_chain.invoke(
-                {"input": text}, handle_parsing_errors=True
-            )
+            result = self.agent_chain.invoke(text)
             return result.get('output')
         except Exception as e:
             logger.error(f"Error generating response: {e}")
